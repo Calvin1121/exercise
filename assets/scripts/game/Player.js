@@ -28,14 +28,14 @@ cc.Class({
     },
     movePlayer(dt){
         let width = this.node.parent.width;
-        if(this.accLeft){
+        if(this.accLeft && window.Global.gameIsPlay){
             if(this.node.x > this.node.width/2 - width/2){
                 this.node.x -= this.accel * Math.pow(dt, 2);
             }else{
                 this.node.x = this.node.width/2 - width/2;
             }
         };
-        if(this.accRight){
+        if(this.accRight && window.Global.gameIsPlay){
             if(this.node.x < width/2 - this.node.width/2){
                 this.node.x += this.accel * Math.pow(dt, 2);
             }else{
