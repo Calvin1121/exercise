@@ -1,1 +1,0 @@
-{"version":3,"sources":["Global.js"],"names":["window","Global","gameIsPlay"],"mappings":";;;;;;AAAAA,OAAOC,MAAP,GAAgB;AACfC,aAAW;AADI,CAAhB","file":"Global.js","sourceRoot":"../../../../assets/scripts","sourcesContent":["window.Global = {\n\tgameIsPlay:false\n};\n"]}
