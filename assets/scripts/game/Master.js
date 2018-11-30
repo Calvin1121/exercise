@@ -60,7 +60,7 @@ cc.Class({
     },
 
     update (dt) {
-        if(window.Global.gameIsPlay){
+        if(window.GameConfig.gameIsPlay){
             this.movePerfab(dt);
         };
         if(this.getPlayerDistance() < this.pickRadius){

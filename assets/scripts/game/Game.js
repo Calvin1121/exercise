@@ -14,11 +14,16 @@ cc.Class({
             default: null,
             type: cc.Node,
         },
+        playOrPause: {
+            default: null,
+            type: cc.Button,
+        },
         alert: {
             default: null,
             type: cc.Label
         },
         scoreFlag: 0,
+        prefabFlag: false
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -30,7 +35,7 @@ cc.Class({
             //在master上暂存game
             newMaster.getComponent('Master').game = this;
             //make prefabFlag be false after a newMaster was created.
-            window.Global.prefabFlag = false;
+            this.prefabFlag = false;
     },
     initScore(){
         //设置计分器的位置
@@ -65,9 +70,9 @@ cc.Class({
         //init socreFlag
         this.scoreFlag = 0;
         //init prefabFlag
-        window.Global.prefabFlag = false;
-        //init the gameIsPlay of Global variable 
-        window.Global.gameIsPlay = false;
+        this.prefabFlag = false;
+        //init the gameIsPlay of GameConfig variable 
+        window.GameConfig.gameIsPlay = false;
         //init alert zindex
         cc.find('Alert', this.node).zIndex = 1;
         //init score position
@@ -79,17 +84,21 @@ cc.Class({
     },
     startGame(dt){
         //create prefab while game is palying
-        if(window.Global.gameIsPlay && window.Global.prefabFlag){
+        if(window.GameConfig.gameIsPlay && this.prefabFlag){
             this.creatPrefab();
         };
     },
     start () {
         //let each prefab interval be 0.8-sec
         setInterval(()=>{
-            window.Global.prefabFlag = true;
+            if(window.GameConfig.gameIsPlay)
+                this.prefabFlag = true;
         },800);
     },
     update (dt) {
         this.startGame();
+        if(!window.GameConfig.gameTimer){
+            cc.find('PlayOrPause', this.node).game = this;
+        }
     },
 });

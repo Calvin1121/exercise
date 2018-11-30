@@ -37,14 +37,14 @@ cc.Class({
     },
     movePlayer(dt){
         let width = this.node.parent.width;
-        if(this.accLeft && window.Global.gameIsPlay){
+        if(this.accLeft && window.GameConfig.gameIsPlay){
             if(this.node.x > this.node.width/2 - width/2){
                 this.node.x -= this.accel * Math.pow(dt, 2);
             }else{
                 this.node.x = this.node.width/2 - width/2;
             }
         };
-        if(this.accRight && window.Global.gameIsPlay){
+        if(this.accRight && window.GameConfig.gameIsPlay){
             if(this.node.x < width/2 - this.node.width/2){
                 this.node.x += this.accel * Math.pow(dt, 2);
             }else{
@@ -57,12 +57,11 @@ cc.Class({
         cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
         cc.systemEvent.on(cc.SystemEvent.EventType.KEY_UP, this.onKeyUp, this);   
     },
-
-    start () {
-
-    },
-
     update (dt) {
         this.movePlayer(dt);
     },
+    onDestroy(){
+        cc.systemEvent.off(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
+        cc.systemEvent.off(cc.SystemEvent.EventType.KEY_UP, this.onKeyUp, this);  
+    }
 });
