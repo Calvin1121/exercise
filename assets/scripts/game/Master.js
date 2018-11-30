@@ -56,7 +56,7 @@ cc.Class({
         this.pickRadius;
     },
     start () {
-        this.play_height = Math.ceil(this.player.height + cc.find('name', this.player).height)/2;
+        this.play_height = Math.ceil(this.game.player.height + cc.find('name', this.game.player).height)/2;
     },
 
     update (dt) {

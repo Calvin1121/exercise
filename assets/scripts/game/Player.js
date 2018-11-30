@@ -7,11 +7,20 @@ cc.Class({
 
     // LIFE-CYCLE CALLBACKS:
     initPlayer(){
+        //获取player的name
         let name = cc.find('name', this.node);
+        //设置player的y轴坐标与层级
         this.node.y = this.node.height + name.height/2 -this.node.parent.height/2;
         this.node.zIndex = 1;
+        //设置name的坐标与player的名字
         name.setPosition(0, -name.height*3);
-        this.node.zIndex = 1;
+        if(localStorage.getItem('current_user')){
+            let current_user =  JSON.parse(localStorage.getItem('current_user'));
+            let nickname = current_user.profile.nickname;
+            name.getComponent(cc.Label).string = nickname;
+        }else{
+            name.getComponent(cc.Label).string = 'Tourist';
+        }
     },
     onKeyDown(event){
         this.keyBoardEvent('done');

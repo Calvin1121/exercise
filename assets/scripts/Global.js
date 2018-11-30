@@ -1,3 +1,5 @@
 window.Global = {
-	gameIsPlay:false
+	gameIsPlay: false,
+	prefabFlag: false,
+	gameTimer: 90,
 };
