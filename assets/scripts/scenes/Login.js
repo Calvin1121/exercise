@@ -94,6 +94,7 @@ cc.Class({
         
     },
     setErrorLabel(type, error){
+        this.error.node.color = new cc.color(235, 58, 58, 255);
         if(type.match(/uncheck/i)){
             this.error.string = 'Please check before logging.';
         }else if(type.match(/account/i)){
@@ -115,11 +116,5 @@ cc.Class({
     onLoad () {
         this.initLogin();
         this.loginbtn.node.on('click', this.loginBtnClick, this);
-    },
-
-    start () {
-
-    },
-
-    // update (dt) {},
+    }
 });

@@ -11,7 +11,8 @@ cc.Class({
 			default: null,
 			type: cc.Label,
 			visible: false
-		}
+		},
+		scene: '',
 	},
 
 	// LIFE-CYCLE CALLBACKS:
@@ -27,29 +28,28 @@ cc.Class({
 		word.string = 'Loading...';
 		word.y = -loadingbar.height;
 	},
-	loading(){
+	loading(dt){
 		let bar = cc.find('LoadingBar/bar', this.node);
-		let timer = setInterval(()=>{
-			if(bar.width<bar.parent.width){
-				bar.width++;
-			};
-			if(bar.width >= bar.parent.width-0.5){
-				clearInterval(timer);
-				cc.director.loadScene("Game");
-				this.node.destroy();
-			};
-		},10);
-		
+		if(bar.width<bar.parent.width){
+			bar.width += Math.ceil(dt)*3;
+		};
+		if(bar.width >= bar.parent.width-0.5){
+			cc.director.loadScene(this.scene);
+			this.node.destroy();
+		};
+	},
+	setScene(){
+		if(localStorage.getItem('access_token')){
+			this.scene = 'Game';
+		}else{
+			this.scene = 'Login';
+		};
 	},
 	onLoad () {
 		this.initLoading();
+		this.setScene();
 	},
-
-	start () {
-		this.loading();
-	},
-
 	update (dt) {
-		
+		this.loading(dt);
 	},
 });
