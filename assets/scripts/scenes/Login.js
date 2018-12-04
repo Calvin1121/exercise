@@ -71,6 +71,7 @@ cc.Class({
         buttons.y = Math.floor(login.height/2 - header.height - error.height - username.height - password.height*1.5 - agreement.height*2.5 - buttons.height * 1.2);
     },
     loginBtnClick(){
+        cc.director.preloadScene("Loading");
         this.loginbtn.enabled = false;
         if(!this.status.isChecked){
         this.setErrorLabel('unchecked', null);

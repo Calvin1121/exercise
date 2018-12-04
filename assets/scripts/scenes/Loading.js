@@ -49,6 +49,9 @@ cc.Class({
 		this.initLoading();
 		this.setScene();
 	},
+	start(){
+		cc.director.preloadScene(this.scene);
+	},
 	update (dt) {
 		this.loading(dt);
 	},

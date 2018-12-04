@@ -13,6 +13,7 @@ cc.Class({
         this.node.on('click', this.isPlay, this);
     },
     isPlay(){
+        cc.director.preloadScene("Loading");
         if(!this.node.enabled){
             return;
         };
@@ -41,7 +42,6 @@ cc.Class({
         }else if(type.string.match(/gameover/i)){
             window.GameConfig.gameTimer = config.gameTimer;
             window.GameConfig.gameIsPlay = config.gameTimer;
-            // window.GameConfig.rePlay = true;
             cc.director.loadScene("Loading");
             this.node.destroy();
         };
