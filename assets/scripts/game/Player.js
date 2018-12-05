@@ -35,6 +35,20 @@ cc.Class({
             this.accRight = type == 'done'?true:false;
         };
     },
+    onTouchStart(event){
+        let touchLoc = event.getLocation();
+        if (touchLoc.x >= cc.winSize.width/2) {
+            this.accLeft = false;
+            this.accRight = true;
+        } else {
+            this.accLeft = true;
+            this.accRight = false;
+        };
+    },
+    onTouchEnd(event){
+        this.accLeft = false;
+        this.accRight = false;
+    },
     movePlayer(dt){
         let width = this.node.parent.width;
         if(this.accLeft && window.GameConfig.gameIsPlay){
@@ -55,7 +69,9 @@ cc.Class({
     onLoad () {
         this.initPlayer();
         cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
-        cc.systemEvent.on(cc.SystemEvent.EventType.KEY_UP, this.onKeyUp, this);   
+        cc.systemEvent.on(cc.SystemEvent.EventType.KEY_UP, this.onKeyUp, this);
+        cc.Canvas.instance.node.on('touchstart', this.onTouchStart, this);
+        cc.Canvas.instance.node.on('touchend', this.onTouchEnd, this);
     },
     update (dt) {
         this.movePlayer(dt);
@@ -63,5 +79,7 @@ cc.Class({
     onDestroy(){
         cc.systemEvent.off(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
         cc.systemEvent.off(cc.SystemEvent.EventType.KEY_UP, this.onKeyUp, this);  
+        cc.Canvas.instance.node.off('touchstart', this.onTouchStart, this);
+        cc.Canvas.instance.node.off('touchend', this.onTouchEnd, this);
     }
 });

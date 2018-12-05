@@ -11,8 +11,7 @@ module.exports = {
                 client_id: "1QOCTIlUrESYWpDNf9keR6OwAehoAzd5ISgwvglh",
                 client_secret:"jQOb5WCV2betjVZYuDlqSYKrvmwF03dTCrE4NwQYXF8bHmzpkLCWfS8lxefbBE6zVOOOQbS9grHBCShkPX3oXzLgWdXnDA59kOmi1BcFpiDtOLOx3guQ7Ry966R5nv9q",
             };
-            let flag = true;
-            let formData;
+            let flag = true, formData;
             try{
                 new FormData();
             }catch (error){
