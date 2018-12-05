@@ -1,4 +1,3 @@
-var flag;
 cc.Class({
 	extends: cc.Component,
 
@@ -39,7 +38,9 @@ cc.Class({
 		};
 	},
 	setScene(){
-		if(localStorage.getItem('access_token')){
+		let token = cc.sys.localStorage.getItem('access_token'),
+			user = cc.sys.localStorage.getItem('current_user');
+		if(token && user){
 			this.scene = 'Game';
 		}else{
 			this.scene = 'Login';

@@ -79,10 +79,11 @@ cc.Class({
             this.setErrorLabel('account', null);
         }else{
             userService.login(this.username.string, this.password.string).then(data=>{
-                localStorage.storeToken(data);
+                cc.sys.localStorage.setItem("access_token", data.access_token);
+                cc.sys.localStorage.setItem("refresh_token", data.refresh_token);
                 userService.getCurrentUser(data.access_token).then(data=>{
                     this.loginbtn.enabled = true;
-                    localStorage.storeUser(JSON.stringify(data));
+                    cc.sys.localStorage.setItem("current_user", JSON.stringify(data));
                     cc.director.loadScene("Loading");
                     this.node.destroy();
                 }, error=>{
