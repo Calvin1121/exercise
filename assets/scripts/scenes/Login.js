@@ -23,7 +23,11 @@ cc.Class({
             default: null,
             type: cc.Toggle,
         },
-        loginbtn: {
+        signin: {
+            default: null,
+            type: cc.Button
+        },
+        signup: {
             default: null,
             type: cc.Button
         }
@@ -116,7 +120,7 @@ cc.Class({
         },2000)
     },
     onLoad () {
-        this.initLogin();
-        this.loginbtn.node.on('click', this.loginBtnClick, this);
+        // this.initLogin();
+        // this.loginbtn.node.on('click', this.loginBtnClick, this);
     }
 });
