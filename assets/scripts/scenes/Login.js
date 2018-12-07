@@ -130,39 +130,45 @@ cc.Class({
         status.x = Math.floor(status.width / 2 - agreement.width / 2);
         agreedetail.x = Math.floor(status.width / 2 - agreement.width / 2 + agreedetail.width / 2 + 15);
     },
-    confirmButton(){
+    confirmButton() {
         cc.director.preloadScene("Loading");
-        if(this.isSignIn){
-            this.signIn();
-        }else{
-            this.signUp();
-        };
-    },
-    signIn(){
         this.confirm.enabled = false;
         if (!this.status.isChecked) {
             this.setErrorLabel('unchecked', null);
-        } else if (this.password.string.trim() == '' || this.username.string.trim() == '') {
-            this.setErrorLabel('account', null);
+            return;
+        } else if (!this.isSignIn && (this.password.string.trim() == '' || this.username.string.trim() == '' || this.repassword.string.trim() == '')) {
+            this.setErrorLabel('signup', null);
+            return;
+        } else if (this.isSignIn && (this.password.string.trim() == '' || this.username.string.trim() == '')) {
+            this.setErrorLabel('signin', null);
+            return;
+        } else if (!this.isSignIn && (this.password.string.trim() != this.repassword.string.trim())) {
+            this.setErrorLabel('password', null);
+            return;
+        };
+        if (this.isSignIn) {
+            this.signIn();
         } else {
-            userService.login(this.username.string, this.password.string).then(data => {
-                cc.sys.localStorage.setItem("access_token", data.access_token);
-                cc.sys.localStorage.setItem("refresh_token", data.refresh_token);
-                userService.getCurrentUser(data.access_token).then(data => {
-                    this.confirm.enabled = true;
-                    cc.sys.localStorage.setItem("current_user", JSON.stringify(data));
-                    cc.director.loadScene("Loading");
-                    this.node.destroy();
-                }, error => {
-                    this.setErrorLabel('error', error);
-                })
+            this.signUp();
+        };
+    },
+    signIn() {
+        userService.login(this.username.string, this.password.string).then(data => {
+            cc.sys.localStorage.setItem("access_token", data.access_token);
+            cc.sys.localStorage.setItem("refresh_token", data.refresh_token);
+            userService.getCurrentUser(data.access_token).then(data => {
+                this.confirm.enabled = true;
+                cc.sys.localStorage.setItem("current_user", JSON.stringify(data));
+                cc.director.loadScene("Loading");
+                this.node.destroy();
             }, error => {
                 this.setErrorLabel('error', error);
-            });
-        }
+            })
+        }, error => {
+            this.setErrorLabel('error', error);
+        });
     },
-    signUp(){
-        cc.director.loadScene("Loading");
+    signUp() {
         this.node.destroy();
         console.log('signup')
     },
@@ -170,8 +176,12 @@ cc.Class({
         this.error.node.color = new cc.color(235, 58, 58, 255);
         if (type.match(/uncheck/i)) {
             this.error.string = 'Please check before logging.';
-        } else if (type.match(/account/i)) {
+        } else if (type.match(/signup/i)) {
+            this.error.string = "Username/Password/RePassword is required.";
+        } else if (type.match(/signin/i)) {
             this.error.string = "Username/Password is required.";
+        } else if (type.match(/password/i)) {
+            this.error.string = "Password and RePassword should be same.";
         } else if (type.match(/error/i)) {
             if (error.error_description) {
                 this.error.string = error.error_description;
@@ -183,10 +193,10 @@ cc.Class({
         };
         setTimeout(() => {
             this.confirm.enabled = true;
-            this.error.string = ' ';
+            this.error.string = '';
         }, 2000)
     },
-    
+
     setXPositionForEditBox(child1, child2, parent) {
         child1.x = Math.floor(child1.width / 2 - parent.width / 2);
         child2.x = Math.floor(child1.width - parent.width / 2 + child2.width / 2 + 5);
@@ -195,6 +205,8 @@ cc.Class({
         this.isSignIn = !this.isSignIn;
         this.password.string = '';
         this.repassword.string = '';
+        this.confirm.enabled = true;
+        this.error.string = '';
         this.initLogin();
     },
     onLoad() {
