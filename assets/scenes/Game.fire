@@ -41,8 +41,8 @@
     },
     "_scale": {
       "__type__": "cc.Vec3",
-      "x": 0.35,
-      "y": 0.35,
+      "x": 0.3859375,
+      "y": 0.3859375,
       "z": 1
     },
     "_quat": {
@@ -1038,7 +1038,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 0,
-      "height": 13.33
+      "height": 15.56
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -1085,7 +1085,7 @@
     "_useOriginalSize": false,
     "_string": "",
     "_N$string": "",
-    "_fontSize": 12,
+    "_fontSize": 14,
     "_lineHeight": 40,
     "_enableWrapText": true,
     "_N$file": {

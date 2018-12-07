@@ -156,11 +156,10 @@ cc.Class({
         userService.login(this.username.string, this.password.string).then(data => {
             cc.sys.localStorage.setItem("access_token", data.access_token);
             cc.sys.localStorage.setItem("refresh_token", data.refresh_token);
-            userService.getCurrentUser(data.access_token).then(data => {
+            userService.getCurrentUser(data.access_token).then(success => {
                 this.confirm.enabled = true;
-                cc.sys.localStorage.setItem("current_user", JSON.stringify(data));
+                cc.sys.localStorage.setItem("current_user", JSON.stringify(success.data));
                 cc.director.loadScene("Loading");
-                this.node.destroy();
             }, error => {
                 this.setErrorLabel('error', error);
             })
@@ -169,13 +168,13 @@ cc.Class({
         });
     },
     signUp() {
-        this.node.destroy();
+        cc.director.loadScene("Loading");
         console.log('signup')
     },
     setErrorLabel(type, error) {
         this.error.node.color = new cc.color(235, 58, 58, 255);
         if (type.match(/uncheck/i)) {
-            this.error.string = 'Please check before logging.';
+            this.error.string = 'Please check before confirming.';
         } else if (type.match(/signup/i)) {
             this.error.string = "Username/Password/RePassword is required.";
         } else if (type.match(/signin/i)) {
@@ -205,8 +204,6 @@ cc.Class({
         this.isSignIn = !this.isSignIn;
         this.password.string = '';
         this.repassword.string = '';
-        this.confirm.enabled = true;
-        this.error.string = '';
         this.initLogin();
     },
     onLoad() {

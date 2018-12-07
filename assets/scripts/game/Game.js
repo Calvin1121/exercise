@@ -91,7 +91,7 @@ cc.Class({
     start () {
         //let each prefab interval be 0.8-sec
         setInterval(()=>{
-            if(window.GameConfig.gameIsPlay)
+            // if(window.GameConfig.gameIsPlay)
                 this.prefabFlag = true;
         },800);
     },

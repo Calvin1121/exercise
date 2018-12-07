@@ -13,11 +13,11 @@ cc.Class({
         this.node.y = this.node.height + name.height/2 -this.node.parent.height/2;
         this.node.zIndex = 1;
         //设置name的坐标与player的名字
-        name.setPosition(0, -name.height*3);
+        name.setPosition(0, -name.height*2.5);
         if(localStorage.getItem('current_user')){
             let current_user =  JSON.parse(localStorage.getItem('current_user'));
-            let nickname = current_user.profile.nickname;
-            name.getComponent(cc.Label).string = nickname;
+            let username = current_user.game_user.username;
+            name.getComponent(cc.Label).string = username;
         }else{
             name.getComponent(cc.Label).string = 'Tourist';
         }
