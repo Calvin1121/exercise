@@ -41,7 +41,7 @@ cc.Class({
 		let token = cc.sys.localStorage.getItem('access_token'),
 			user = cc.sys.localStorage.getItem('current_user');
 		if(token && user){
-			this.scene = 'Game';
+			this.scene = 'Hotdog';
 		}else{
 			this.scene = 'Login';
 		};

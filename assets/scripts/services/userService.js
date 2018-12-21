@@ -8,8 +8,8 @@ module.exports = {
                 username: username,
                 password: password,
                 grant_type: "password",
-                client_id: "JvFJzK1MeZRv4pGi0IVK0aMlXFuf8SR22PZVIatq",
-                client_secret:"LnMhkBXmJvY13knqX1MWkqYLA4cMl0xo3VeFI9z6rB9w2GnzTMwP50m8hrFDy6R5sz77LzYPO4rmVvaN6nurqHkjcEa8MskMqxqgWwTgTFnMOkkfj866s6Kkf23Cv6wI",
+                client_id: "ek0CZGqS4i06dpiDYNpDz0k6boJJIih9ITCaT6DP",
+                client_secret:"AccYt5VLmjktWuxoiS14dVZ59OtyayXbj8NlpaaX12F2j126COVrIuXLnjehrU49tYLysW6BWwOHSuIxOR0a3Ko84mZANiilwDpKNBajxTRV9oWmhUZjby3P5ICBb7up",
             };
             let flag = true, formData;
             try{

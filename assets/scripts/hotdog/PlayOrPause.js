@@ -1,4 +1,3 @@
-const config = JSON.parse(JSON.stringify(window.GameConfig));
 cc.Class({
     extends: cc.Component,
 
@@ -40,8 +39,8 @@ cc.Class({
             window.GameConfig.gameIsPlay = false;
             this.node.enabled = true;
         }else if(type.string.match(/gameover/i)){
-            window.GameConfig.gameTimer = config.gameTimer;
-            window.GameConfig.gameIsPlay = config.gameTimer;
+            window.GameConfig.gameTimer = this.gameConfig.gameTimer;
+            window.GameConfig.gameIsPlay = this.gameConfig.gameIsPlay;
             cc.director.loadScene("Loading");
             this.node.destroy();
         };
@@ -66,6 +65,7 @@ cc.Class({
     },
     onLoad () {
         this.initButton();
+        this.gameConfig = JSON.parse(JSON.stringify(window.GameConfig));
     },
     update (dt) {
         this.setBtnPosition(dt);

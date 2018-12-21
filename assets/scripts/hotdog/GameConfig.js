@@ -1,4 +1,4 @@
 window.GameConfig = {
 	gameIsPlay: false,
-	gameTimer: 120,
+	gameTimer: 10,
 };
